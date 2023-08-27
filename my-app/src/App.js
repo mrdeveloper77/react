@@ -1,29 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
-import MyTestElement from './MyTestElement';
-
 import React from 'react';
-
+import logo from './logo.svg';
+import './app.css';
+import SystemTime from './SystemTime';
 
 function App() {
- 
   return (
-    <div className="App">
-      <header className="App-header">
-        <div className="App-clock" >
-          <Clock />
-        </div>
-        <img src={logo} className="App-logo" alt="logo" />
-        <div> 
-          <Welcome name="Component Property" />
-        </div>
-
-        <div className="App-customDiv" >
-          {< MyTestElement />}
-        </div>
+      <div className="App">
         <p>
           Edit <code>src/App.js</code> and save to reload.
+          <img src={logo} className="App-logo" alt="logo" />
         </p>
+        <div>
+          <Welcome name="Component Property" />
+        </div>
+        <div>
+          <CurrentTime name="User Name" />
+        </div>
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -32,55 +24,19 @@ function App() {
         >
           Learn React
         </a>
-      </header>
-    </div>
-  );
-}
+      </div>  
 
-function CurrentTime() {
-  return new Date().toLocaleTimeString();
-}
+  );
+};
 
 //Component: Welcome
 function Welcome(props) {
   return <div>Component using {props.name}</div>;
 }
 
-
-class Clock extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {date: new Date()};
-  }
-
-  //lifecycle start
-  componentDidMount() {
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000
-    );
-  }
-
-  //lifecycle end
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-
-  tick() {
-    this.setState({
-      date: new Date()
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        { this.state.date.toLocaleTimeString() }
-      </div>
-    );
-  }
+function CurrentTime(props) {
+  console.info( props.name + "logged in");
+  return new Date().toLocaleTimeString();
 }
-
 
 export default App;
